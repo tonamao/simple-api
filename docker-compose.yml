@@ -1,0 +1,26 @@
+version: "3"
+services:
+  node:
+    container_name: node_express
+    build: ./app
+    volumes:
+      - ./app:/app
+    tty:  true
+    ports:
+      - 3000:3000
+
+  db:
+    container_name: postgres_db
+    image: postgres:13
+    ports:
+      - 15432:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: webapp
+      TZ: "Asia/Tokyo"
+    volumes:
+      - postgres_data:/var/lib/posrgresql/data
+
+volumes:
+  postgres_data: {}
